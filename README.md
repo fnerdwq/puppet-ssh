@@ -1,4 +1,4 @@
-#ssh
+#puppet-ssh
 
 ####Table of Contents
 
@@ -15,9 +15,9 @@
 
 ##Overview
 
-This small ssh module manages the openssh server and client on RedHat and Debian like sytem. Up to now it just lets you configure some elementary settings. Ssh host keys are distributed via exported resources.
+This small ssh module manages the openssh server and client on RedHat and Debian like system. Up to now it just lets you configure some elementary settings. Ssh host keys are distributed via exported resources.
 
-Written vor Puppet >= 3.4.0.
+Written for Puppet >= 3.4.0.
 
 ##Module Description
 
