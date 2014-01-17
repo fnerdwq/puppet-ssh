@@ -4,14 +4,12 @@
 
 1. [Overview](#overview)
 2. [Module Description](#module-description)
-3. [Setup - The basics of getting started with Ssh](#setup)
+3. [Setup](#setup)
     * [What Ssh affects](#what-ssh-affects)
     * [Setup requirements](#setup-requirements)
     * [Beginning with Ssh](#beginning-with-Ssh)
-4. [Usage - Configuration options and additional functionality](#usage)
-5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
-5. [Limitations - OS compatibility, etc.](#limitations)
-6. [Development - Guide for contributing to the module](#development)
+4. [Usage](#usage)
+5. [Limitations](#limitations)
 
 ##Overview
 
