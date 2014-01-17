@@ -14,7 +14,7 @@
 #
 # === Examples
 #
-# class { ssh-server:
+# class { 'ssh-server':
 #    port => 2222,
 # }
 #

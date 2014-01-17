@@ -50,8 +50,8 @@ Configure it through hiera or declare it resource-like by calling the server/cli
 
 ```puppet
 class { 'ssh::server':
-  port = 2222,
-  passwordAuthentication = 'no'
+  port                   => 2222,
+  passwordAuthentication => 'no'
 }
 ```
 
