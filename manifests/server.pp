@@ -37,5 +37,6 @@ class ssh::server (
   class { 'ssh::server::install': }
   -> class { 'ssh::server::config': }
   ~> class { 'ssh::server::service': }
+  -> class { 'ssh::server::sshkeys': }
 
 }

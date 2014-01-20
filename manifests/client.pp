@@ -18,5 +18,6 @@ class ssh::client inherits ssh::client::params {
 
   class { 'ssh::client::install': }
   -> class { 'ssh::client::config': }
+  -> class { 'ssh::client::sshknownhosts': }
 
 }
