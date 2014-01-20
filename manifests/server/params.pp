@@ -1,4 +1,4 @@
-# set flavor specific variables
+# set flavor specific variables (private)
 class ssh::server::params {
 
   $package = 'openssh-server'

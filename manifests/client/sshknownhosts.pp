@@ -1,4 +1,4 @@
-# Set up ssh client configuration files
+# Set up ssh client configuration files (private)
 class ssh::client::sshknownhosts {
 
   # this file should be readable for everyone (Sshkey, does not create it right)

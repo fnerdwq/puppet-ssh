@@ -1,4 +1,4 @@
-# mange the ssh service
+# mange the ssh service (private)
 class ssh::server::service {
 
   service { 'ssh-server':

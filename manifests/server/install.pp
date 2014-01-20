@@ -1,4 +1,4 @@
-# install openssh server
+# install openssh server (private)
 class ssh::server::install {
 
   package { 'ssh-server':

@@ -1,4 +1,4 @@
-# Set up ssh client configuration files
+# Set up ssh client configuration files (private)
 class ssh::client::config {
 
   file { '/etc/ssh/ssh_config':

@@ -1,4 +1,4 @@
-# install the openssh client package
+# install the openssh client package (private)
 class ssh::client::install {
 
   package { 'ssh-client':
