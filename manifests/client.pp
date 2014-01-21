@@ -4,7 +4,7 @@
 #
 # === Examples
 #
-# class { 'ssh-client': }
+# class { 'ssh::client': }
 #
 # === Authors
 #
