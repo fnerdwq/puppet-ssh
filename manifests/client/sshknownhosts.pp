@@ -9,17 +9,12 @@ class ssh::client::sshknownhosts {
     group   => root,
   }
 
-  # only when storeconfigs ist eneabled!
-  if $::storeconfigs {
+  # delete not available sshkey
+  resources { 'sshkey': purge => true }
 
-    # delete not available sshkey
-    resources { 'sshkey': purge => true }
-
-    # collect all host rsa/dsa keys to put in ssh_known_hosts
-    Sshkey <<||>> {
-      require => File['/etc/ssh/ssh_known_hosts'],
-    }
-
+  # collect all host rsa/dsa keys to put in ssh_known_hosts
+  Sshkey <<||>> {
+    require => File['/etc/ssh/ssh_known_hosts'],
   }
 
 }
