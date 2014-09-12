@@ -3,7 +3,7 @@ class ssh::server::params {
 
   $port = 22
   $passwordAuthentication = 'yes'
-  $export_ssh_host_keys = true
+  $export_host_keys = true
 
   $package = 'openssh-server'
 
