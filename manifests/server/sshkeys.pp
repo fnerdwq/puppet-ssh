@@ -3,7 +3,7 @@ class ssh::server::sshkeys {
 
   # collect all ipadresses as alias for the host keys
   $ipaddresses = ipaddresses()
-  $host_aliases = flatten([ $::fqdn, $::hostname, $ipaddresses ])
+  $host_aliases = flatten([ $::fqdn, $::hostname, $ipaddresses, $ssh::server::host_aliases ])
 
   @@sshkey { "${::fqdn}_dsa":
     host_aliases => $host_aliases,

@@ -1,9 +1,10 @@
 # set flavor specific variables (private)
 class ssh::server::params {
 
-  $port = 22
+  $port                   = 22
   $passwordAuthentication = 'yes'
-  $export_host_keys = true
+  $export_host_keys       = true
+  $host_aliases           = []
 
   $package = 'openssh-server'
 
