@@ -1,6 +1,8 @@
 # set flavor specific variables (private)
 class ssh::client::params {
 
+  $manage_known_hosts = true
+
   case $::osfamily {
     'Debian': {
       $package = 'openssh-client'
