@@ -21,7 +21,7 @@
 # Copyright 2014 Frederik Wagner
 #
 class ssh::client (
-  $manage_known_hosts = ssh::client::params::manage_known_hosts,
+  $manage_known_hosts = $ssh::client::params::manage_known_hosts,
 ) inherits ssh::client::params {
 
   validate_bool($manage_known_hosts)
