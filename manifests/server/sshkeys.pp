@@ -23,5 +23,4 @@ class ssh::server::sshkeys {
     }
   }
 
-
 }
