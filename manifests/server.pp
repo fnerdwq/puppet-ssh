@@ -38,7 +38,7 @@ class ssh::server (
 
   if ! is_integer($port) { fail('Port should be an integer') }
   validate_re($passwordAuthentication, '^(yes|no)$')
-  valiate_bool($export_ssh_host_keys)
+  validate_bool($export_ssh_host_keys)
 
   class { 'ssh::server::install': } ->
   class { 'ssh::server::config': } ~>
