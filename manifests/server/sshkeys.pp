@@ -5,15 +5,19 @@ class ssh::server::sshkeys {
   $ipaddresses = ipaddresses()
   $host_aliases = flatten([ $::fqdn, $::hostname, $ipaddresses, $ssh::server::host_aliases ])
 
-  @@sshkey { "${::fqdn}_dsa":
-    host_aliases => $host_aliases,
-    type         => dsa,
-    key          => $::sshdsakey,
+  if $::sshdsakey {
+    @@sshkey { "${::fqdn}_dsa":
+      host_aliases => $host_aliases,
+      type         => dsa,
+      key          => $::sshdsakey,
+    }
   }
-  @@sshkey { "${::fqdn}_rsa":
-    host_aliases => $host_aliases,
-    type         => rsa,
-    key          => $::sshrsakey,
+  if $::sshrsakey {
+    @@sshkey { "${::fqdn}_rsa":
+      host_aliases => $host_aliases,
+      type         => rsa,
+      key          => $::sshrsakey,
+    }
   }
   if $::sshecdsakey {
     @@sshkey { "${::fqdn}_ecdsa":
