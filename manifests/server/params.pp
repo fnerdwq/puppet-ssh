@@ -4,6 +4,7 @@ class ssh::server::params {
   $port                   = 22
   $pubkeyAuthentication   = 'yes'
   $passwordAuthentication = 'yes'
+  $permitRootLogin        = 'yes'
   $kexAlgorithms          = undef
   $ciphers                = undef
   $macs                   = undef

@@ -50,6 +50,7 @@ class ssh::server (
   $port                   = $ssh::server::params::port,
   $pubkeyAuthentication   = $ssh::server::params::pubkeyAuthentication,
   $passwordAuthentication = $ssh::server::params::passwordAuthentication,
+  $permitRootLogin        = $ssh::server::params::permitRootLogin,
   $kexAlgorithms          = $ssh::server::params::kexAlgorithms,
   $ciphers                = $ssh::server::params::ciphers,
   $macs                   = $ssh::server::params::macs,
@@ -60,6 +61,7 @@ class ssh::server (
   if ! is_integer($port) { fail('Port should be an integer') }
   validate_re($pubkeyAuthentication, '^(yes|no)$')
   validate_re($passwordAuthentication, '^(yes|no)$')
+  validate_re($permitRootLogin, '^(yes|no)$')
   # TODO: check kexAlgorithsm, ciphers, macs
   validate_bool($export_host_keys)
   validate_array($host_aliases)

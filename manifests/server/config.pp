@@ -4,6 +4,7 @@ class ssh::server::config {
   $port                   = $ssh::server::port
   $pubkeyAuthentication   = $ssh::server::pubkeyAuthentication
   $passwordAuthentication = $ssh::server::passwordAuthentication
+  $permitRootLogin        = $ssh::server::permitRootLogin
   $host_aliases           = $ssh::server::host_aliases
   $kexAlgorithms          = $ssh::server::kexAlgorithms
   $ciphers                = $ssh::server::ciphers

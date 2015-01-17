@@ -50,7 +50,7 @@ SyslogFacility <%= scope.lookupvar('ssh::server::params::syslogFacility') %>
 # Authentication:
 
 #LoginGraceTime 2m
-#PermitRootLogin yes
+PermitRootLogin <%= @permitRootLogin %>
 #StrictModes yes
 #MaxAuthTries 6
 #MaxSessions 10
