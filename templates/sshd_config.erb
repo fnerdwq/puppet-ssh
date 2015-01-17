@@ -1,5 +1,5 @@
 # sshd_config: Managed by puppet.
-# 
+#
 # This is the sshd server system-wide configuration file.  See
 # sshd_config(5) for more information.
 
@@ -8,7 +8,7 @@
 # possible, but leave them commented.  Uncommented options change a
 # default value.
 
-Port <%= scope.lookupvar('ssh::server::port') %>
+Port <%= @port %>
 #AddressFamily any
 #ListenAddress 0.0.0.0
 #ListenAddress ::
@@ -29,10 +29,22 @@ Protocol 2
 #KeyRegenerationInterval 1h
 #ServerKeyBits 1024
 
+### Security Settings
+# optimal settings, see: <https://stribika.github.io/2015/01/04/secure-secure-shell.html>
+<% if @kexAlgorithms -%>
+KexAlgorithms <%= @kexAlgorithms %>
+<% end -%>
+<% if @ciphers -%>
+Ciphers <%= @ciphers %>
+<% end -%>
+<% if @macs -%>
+MACs <%= @macs %>
+<% end -%>
+
 # Logging
 # obsoletes QuietMode and FascistLogging
 #SyslogFacility AUTH
-SyslogFacility <%= scope.lookupvar('ssh::server::params::syslogFacility') %> 
+SyslogFacility <%= scope.lookupvar('ssh::server::params::syslogFacility') %>
 #LogLevel INFO
 
 # Authentication:
@@ -44,7 +56,7 @@ SyslogFacility <%= scope.lookupvar('ssh::server::params::syslogFacility') %>
 #MaxSessions 10
 
 #RSAAuthentication yes
-#PubkeyAuthentication yes
+PubkeyAuthentication <%= @pubkeyAuthentication %>
 #AuthorizedKeysFile	.ssh/authorized_keys
 #AuthorizedKeysCommand none
 #AuthorizedKeysCommandRunAs nobody
@@ -60,7 +72,7 @@ SyslogFacility <%= scope.lookupvar('ssh::server::params::syslogFacility') %>
 #IgnoreRhosts yes
 
 # To disable tunneled clear text passwords, change to no here!
-PasswordAuthentication <%= scope.lookupvar('ssh::server::passwordAuthentication') %>
+PasswordAuthentication <%= @passwordAuthentication %>
 #PermitEmptyPasswords no
 
 # Change to no to disable s/key passwords
@@ -79,8 +91,8 @@ ChallengeResponseAuthentication no
 #GSSAPIStrictAcceptorCheck yes
 #GSSAPIKeyExchange no
 
-# Set this to 'yes' to enable PAM authentication, account processing, 
-# and session processing. If this is enabled, PAM authentication will 
+# Set this to 'yes' to enable PAM authentication, account processing,
+# and session processing. If this is enabled, PAM authentication will
 # be allowed through the ChallengeResponseAuthentication and
 # PasswordAuthentication.  Depending on your PAM configuration,
 # PAM authentication via ChallengeResponseAuthentication may bypass

@@ -2,7 +2,12 @@
 class ssh::server::params {
 
   $port                   = 22
+  $pubkeyAuthentication   = 'yes'
   $passwordAuthentication = 'yes'
+  $kexAlgorithms          = undef
+  $ciphers                = undef
+  $macs                   = undef
+
   $export_host_keys       = true
   $host_aliases           = []
 
