@@ -8,6 +8,7 @@ class ssh::server::params {
   $kexAlgorithms          = undef
   $ciphers                = undef
   $macs                   = undef
+  $secure_moduli          = false
 
   $export_host_keys       = true
   $host_aliases           = []

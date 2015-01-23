@@ -18,4 +18,11 @@ class ssh::server::config {
     content => template('ssh/sshd_config.erb'),
   }
 
+  if $ssh::server::secure_moduli {
+    exec { 'remove moduli <= 2000 bit':
+      command => 'awk \'$5 > 2000\' /etc/ssh/moduli > /tmp/moduli && mv /tmp/moduli /etc/ssh/moduli',
+      unless  => 'test $(awk \'$5 <= 2000\' /etc/ssh/moduli | wc -l) -eq 0',
+      path    => [ '/bin', '/usr/bin' ],
+    }
+  }
 }
