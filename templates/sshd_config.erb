@@ -21,13 +21,19 @@ Protocol 2
 # HostKey for protocol version 1
 #HostKey /etc/ssh/ssh_host_key
 # HostKeys for protocol version 2
-#HostKey /etc/ssh/ssh_host_rsa_key
+HostKey /etc/ssh/ssh_host_rsa_key
 #HostKey /etc/ssh/ssh_host_dsa_key
-#HostKey /etc/ssh/ssh_host_ecdsa_key
+HostKey /etc/ssh/ssh_host_ecdsa_key
+<% if @ssh_host_ed25519_key -%>
+HostKey /etc/ssh/ssh_host_ed25519_key
+<% end -%>
 
 # Lifetime and size of ephemeral version 1 server key
 #KeyRegenerationInterval 1h
 #ServerKeyBits 1024
+
+# Ciphers and keying
+#RekeyLimit default none
 
 ### Security Settings
 # optimal settings, see: <https://stribika.github.io/2015/01/04/secure-secure-shell.html>
@@ -57,9 +63,15 @@ PermitRootLogin <%= @permitRootLogin %>
 
 #RSAAuthentication yes
 PubkeyAuthentication <%= @pubkeyAuthentication %>
-#AuthorizedKeysFile	.ssh/authorized_keys
+
+# The default is to check both .ssh/authorized_keys and .ssh/authorized_keys2
+# but this is overridden so installations will only check .ssh/authorized_keys
+AuthorizedKeysFile	.ssh/authorized_keys
+
+#AuthorizedPrincipalsFile none
+
 #AuthorizedKeysCommand none
-#AuthorizedKeysCommandRunAs nobody
+#AuthorizedKeysCommandUser nobody
 
 # For this to work you will also need host keys in /etc/ssh/ssh_known_hosts
 #RhostsRSAAuthentication no
@@ -90,6 +102,7 @@ ChallengeResponseAuthentication no
 #GSSAPICleanupCredentials yes
 #GSSAPIStrictAcceptorCheck yes
 #GSSAPIKeyExchange no
+#GSSAPIEnablek5users no
 
 # Set this to 'yes' to enable PAM authentication, account processing,
 # and session processing. If this is enabled, PAM authentication will
@@ -100,26 +113,22 @@ ChallengeResponseAuthentication no
 # If you just want the PAM account and session checks to run without
 # PAM authentication, then enable this but set PasswordAuthentication
 # and ChallengeResponseAuthentication to 'no'.
+# WARNING: 'UsePAM no' is not supported in Red Hat Enterprise Linux and may cause several
+# problems.
 UsePAM yes
-
-# Accept locale-related environment variables
-AcceptEnv LANG LC_CTYPE LC_NUMERIC LC_TIME LC_COLLATE LC_MONETARY LC_MESSAGES
-AcceptEnv LC_PAPER LC_NAME LC_ADDRESS LC_TELEPHONE LC_MEASUREMENT
-AcceptEnv LC_IDENTIFICATION LC_ALL LANGUAGE
-AcceptEnv XMODIFIERS
 
 #AllowAgentForwarding yes
 #AllowTcpForwarding yes
 #GatewayPorts no
-#X11Forwarding no
 X11Forwarding yes
 #X11DisplayOffset 10
 #X11UseLocalhost yes
+#PermitTTY yes
 PrintMotd <%= scope.lookupvar('ssh::server::params::printMotd') %>
 #PrintLastLog yes
 #TCPKeepAlive yes
 #UseLogin no
-#UsePrivilegeSeparation yes
+UsePrivilegeSeparation <%= scope.lookupvar('ssh::server::params::usePrivilegeSeparation') %>
 #PermitUserEnvironment no
 #Compression delayed
 #ClientAliveInterval 0
@@ -130,9 +139,16 @@ PrintMotd <%= scope.lookupvar('ssh::server::params::printMotd') %>
 #MaxStartups 10:30:100
 #PermitTunnel no
 #ChrootDirectory none
+#VersionAddendum none
 
 # no default banner path
 #Banner none
+
+# Accept locale-related environment variables
+AcceptEnv LANG LC_CTYPE LC_NUMERIC LC_TIME LC_COLLATE LC_MONETARY LC_MESSAGES
+AcceptEnv LC_PAPER LC_NAME LC_ADDRESS LC_TELEPHONE LC_MEASUREMENT
+AcceptEnv LC_IDENTIFICATION LC_ALL LANGUAGE
+AcceptEnv XMODIFIERS
 
 # override default of no subsystems
 Subsystem	sftp	<%= scope.lookupvar('ssh::server::params::sftp_server') %>
@@ -141,4 +157,5 @@ Subsystem	sftp	<%= scope.lookupvar('ssh::server::params::sftp_server') %>
 #Match User anoncvs
 #	X11Forwarding no
 #	AllowTcpForwarding no
+#	PermitTTY no
 #	ForceCommand cvs server

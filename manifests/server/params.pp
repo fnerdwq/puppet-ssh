@@ -21,12 +21,28 @@ class ssh::server::params {
       $sftp_server = '/usr/lib/openssh/sftp-server'
       $printMotd = 'no'
       $syslogFacility = 'AUTH'
+
+      if $::lsbmajdistrelease >= 8 {
+        $ssh_host_ed25519_key   = true
+        $usePrivilegeSeparation = 'sandbox'
+      } else {
+        $ssh_host_ed25519_key   = false
+        $usePrivilegeSeparation = 'yes'
+      }
     }
     'RedHat': {
       $service = 'sshd'
       $sftp_server = '/usr/libexec/openssh/sftp-server'
       $printMotd = 'yes'
       $syslogFacility = 'AUTHPRIV'
+
+      if $::lsbmajdistrelease >= 7 {
+        $ssh_host_ed25519_key   = true
+        $usePrivilegeSeparation = 'sandbox'
+      } else {
+        $ssh_host_ed25519_key   = false
+        $usePrivilegeSeparation = 'yes'
+      }
     }
     default:  {
       fail("Module ${module_name} is not supported on ${::operatingsystem}/${::osfamily}")
