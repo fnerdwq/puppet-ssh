@@ -25,4 +25,16 @@ class ssh::server::config {
       path    => [ '/bin', '/usr/bin' ],
     }
   }
+
+  # set selinux policy for ssh port
+  if $ssh::server::selinux_policy {
+    ensure_packages('policycoreutils-python')
+    exec { "semanage port policy for ssh_port_t: ${port}":
+      command => "/sbin/semanage port -a -t ssh_port_t -p tcp ${port}",
+      unless  => "/sbin/semanage port --list | /bin/egrep '^ssh_port_t\s*tcp\s*${port}'",
+      path    => ['/sbin', '/usr/sbin', '/bin'],
+      require => Package['policycoreutils-python'],
+    }
+  }
+
 }

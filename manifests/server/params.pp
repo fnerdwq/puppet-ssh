@@ -18,9 +18,11 @@ class ssh::server::params {
   case $::osfamily {
     'Debian': {
       $service = 'ssh'
+      $selinux_policy = false
       $sftp_server = '/usr/lib/openssh/sftp-server'
       $printMotd = 'no'
       $syslogFacility = 'AUTH'
+
 
       if $::lsbmajdistrelease >= 8 {
         $ssh_host_ed25519_key   = true
@@ -32,6 +34,7 @@ class ssh::server::params {
     }
     'RedHat': {
       $service = 'sshd'
+      $selinux_policy = true
       $sftp_server = '/usr/libexec/openssh/sftp-server'
       $printMotd = 'yes'
       $syslogFacility = 'AUTHPRIV'
