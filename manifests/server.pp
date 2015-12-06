@@ -9,6 +9,10 @@
 # [*port*]
 #   The port were ssh should listen, default: 22
 #
+# [*selinux_policy*]
+#   Whether or not to manage selinux ssh port policy,
+#   default: false (Debian) / true (RedHat)
+#
 # [*pubkeyAuthentication*]
 #   If PubkeyAuthentication is allowed, default: yes
 #
@@ -51,6 +55,7 @@
 #
 class ssh::server (
   $port                   = $ssh::server::params::port,
+  $selinux_policy         = $ssh::server::params::selinux_policy,
   $pubkeyAuthentication   = $ssh::server::params::pubkeyAuthentication,
   $passwordAuthentication = $ssh::server::params::passwordAuthentication,
   $permitRootLogin        = $ssh::server::params::permitRootLogin,
