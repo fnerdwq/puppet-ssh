@@ -39,7 +39,7 @@ class ssh::server::params {
       $printMotd = 'yes'
       $syslogFacility = 'AUTHPRIV'
 
-      if $::lsbmajdistrelease >= 7 {
+      if versioncmp($::operatingsystemmajrelease, '7') >=0 {
         $ssh_host_ed25519_key   = true
         $usePrivilegeSeparation = 'sandbox'
       } else {
