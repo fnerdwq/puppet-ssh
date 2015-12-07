@@ -24,7 +24,7 @@ class ssh::server::params {
       $syslogFacility = 'AUTH'
 
 
-      if $::lsbmajdistrelease >= 8 {
+      if versioncmp($::operatingsystemmajrelease, '8') >=0 {
         $ssh_host_ed25519_key   = true
         $usePrivilegeSeparation = 'sandbox'
       } else {
