@@ -70,7 +70,7 @@ class ssh::server (
   if ! is_integer($port) { fail('Port should be an integer') }
   validate_re($pubkeyAuthentication, '^(yes|no)$')
   validate_re($passwordAuthentication, '^(yes|no)$')
-  validate_re($permitRootLogin, '^(yes|no)$')
+  validate_re($permitRootLogin, '^(yes|no|without-password|forced-commands-only)$')
   # TODO: check kexAlgorithsm, ciphers, macs
   validate_bool($secure_moduli)
   validate_bool($export_host_keys)
