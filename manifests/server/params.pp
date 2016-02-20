@@ -5,6 +5,9 @@ class ssh::server::params {
   $pubkeyAuthentication   = 'yes'
   $passwordAuthentication = 'yes'
   $permitRootLogin        = 'yes'
+  $useDns                 = 'yes'
+  $clientAliveInterval    = 0
+  $maxAuthTries           = 6
   $kexAlgorithms          = undef
   $ciphers                = undef
   $macs                   = undef

@@ -5,7 +5,9 @@ class ssh::server::config {
   $pubkeyAuthentication   = $ssh::server::pubkeyAuthentication
   $passwordAuthentication = $ssh::server::passwordAuthentication
   $permitRootLogin        = $ssh::server::permitRootLogin
-  $host_aliases           = $ssh::server::host_aliases
+  $useDns                 = $ssh::server::useDns
+  $clientAliveInterval    = $ssh::server::clientAliveInterval
+  $maxAuthTries           = $ssh::server::maxAuthTries
   $kexAlgorithms          = $ssh::server::kexAlgorithms
   $ciphers                = $ssh::server::ciphers
   $macs                   = $ssh::server::macs

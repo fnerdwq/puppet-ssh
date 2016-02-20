@@ -19,6 +19,18 @@
 # [*passwordAuthentication*]
 #   If PasswordAuthentication is allowed, default: yes
 #
+# [*permitRootLogin*]
+#   If Root login is allowed (PermitRootLogin), default: yes
+#
+# [*useDns*]
+#   If DNS lookup is used (UseDNS), default: yes
+#
+# [*clientAliveInterval*]
+#   Set ClientAliveInterval, default: 0
+#
+# [*maxAuthTries*]
+#   Set MaxAuthTries, default: 6
+#
 # [*ciphers*]
 #   Sets the allowed Ciphers, default: undef
 #
@@ -59,6 +71,9 @@ class ssh::server (
   $pubkeyAuthentication   = $ssh::server::params::pubkeyAuthentication,
   $passwordAuthentication = $ssh::server::params::passwordAuthentication,
   $permitRootLogin        = $ssh::server::params::permitRootLogin,
+  $useDns                 = $ssh::server::params::useDns,
+  $clientAliveInterval    = $ssh::server::params::clientAliveInterval,
+  $maxAuthTries           = $ssh::server::params::maxAuthTries,
   $kexAlgorithms          = $ssh::server::params::kexAlgorithms,
   $ciphers                = $ssh::server::params::ciphers,
   $macs                   = $ssh::server::params::macs,
@@ -67,10 +82,13 @@ class ssh::server (
   $host_aliases           = $ssh::server::params::host_aliases,
 ) inherits ssh::server::params {
 
-  if ! is_integer($port) { fail('Port should be an integer') }
+  if ! is_integer($port) { fail('Port must be an integer') }
   validate_re($pubkeyAuthentication, '^(yes|no)$')
   validate_re($passwordAuthentication, '^(yes|no)$')
   validate_re($permitRootLogin, '^(yes|no|without-password|forced-commands-only)$')
+  validate_re($useDns, '^(yes|no)$')
+  if ! is_integer($clientAliveInterval) { fail('clientAliveInterval must be an integer') }
+  if ! is_integer($maxAuthTries) { fail('maxAuthTries must be an integer') }
   # TODO: check kexAlgorithsm, ciphers, macs
   validate_bool($secure_moduli)
   validate_bool($export_host_keys)

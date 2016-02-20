@@ -58,7 +58,7 @@ SyslogFacility <%= scope.lookupvar('ssh::server::params::syslogFacility') %>
 #LoginGraceTime 2m
 PermitRootLogin <%= @permitRootLogin %>
 #StrictModes yes
-#MaxAuthTries 6
+MaxAuthTries <%= @maxAuthTries %>
 #MaxSessions 10
 
 #RSAAuthentication yes
@@ -131,10 +131,10 @@ PrintMotd <%= scope.lookupvar('ssh::server::params::printMotd') %>
 UsePrivilegeSeparation <%= scope.lookupvar('ssh::server::params::usePrivilegeSeparation') %>
 #PermitUserEnvironment no
 #Compression delayed
-#ClientAliveInterval 0
+ClientAliveInterval <%= @clientAliveInterval %>
 #ClientAliveCountMax 3
 #ShowPatchLevel no
-#UseDNS yes
+UseDNS <%= @useDns %>
 #PidFile /var/run/sshd.pid
 #MaxStartups 10:30:100
 #PermitTunnel no
