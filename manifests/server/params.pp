@@ -7,6 +7,7 @@ class ssh::server::params {
   $permitRootLogin        = 'yes'
   $useDns                 = 'yes'
   $clientAliveInterval    = 0
+  $strictModes            = 'yes'
   $maxAuthTries           = 6
   $kexAlgorithms          = undef
   $ciphers                = undef

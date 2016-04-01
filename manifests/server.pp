@@ -28,6 +28,9 @@
 # [*clientAliveInterval*]
 #   Set ClientAliveInterval, default: 0
 #
+# [*strictModes*]
+#   Set StrictModes, default: yes
+#
 # [*maxAuthTries*]
 #   Set MaxAuthTries, default: 6
 #
@@ -73,6 +76,7 @@ class ssh::server (
   $permitRootLogin        = $ssh::server::params::permitRootLogin,
   $useDns                 = $ssh::server::params::useDns,
   $clientAliveInterval    = $ssh::server::params::clientAliveInterval,
+  $strictModes            = $ssh::server::params::strictModes,
   $maxAuthTries           = $ssh::server::params::maxAuthTries,
   $kexAlgorithms          = $ssh::server::params::kexAlgorithms,
   $ciphers                = $ssh::server::params::ciphers,
@@ -88,6 +92,7 @@ class ssh::server (
   validate_re($permitRootLogin, '^(yes|no|without-password|forced-commands-only)$')
   validate_re($useDns, '^(yes|no)$')
   if ! is_integer($clientAliveInterval) { fail('clientAliveInterval must be an integer') }
+  validate_re($strictModes, '^(yes|no)$')
   if ! is_integer($maxAuthTries) { fail('maxAuthTries must be an integer') }
   # TODO: check kexAlgorithsm, ciphers, macs
   validate_bool($secure_moduli)

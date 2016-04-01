@@ -7,6 +7,7 @@ class ssh::server::config {
   $permitRootLogin        = $ssh::server::permitRootLogin
   $useDns                 = $ssh::server::useDns
   $clientAliveInterval    = $ssh::server::clientAliveInterval
+  $strictModes            = $ssh::server::strictModes
   $maxAuthTries           = $ssh::server::maxAuthTries
   $kexAlgorithms          = $ssh::server::kexAlgorithms
   $ciphers                = $ssh::server::ciphers
