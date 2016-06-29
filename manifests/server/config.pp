@@ -33,8 +33,8 @@ class ssh::server::config {
   if $ssh::server::selinux_policy {
     ensure_packages('policycoreutils-python')
     exec { "semanage port policy for ssh_port_t: ${port}":
-      command => "/sbin/semanage port -a -t ssh_port_t -p tcp ${port}",
-      unless  => "/sbin/semanage port --list | /bin/egrep '^ssh_port_t\s*tcp\s*${port}'",
+      command => "semanage port -a -t ssh_port_t -p tcp ${port}",
+      unless  => "semanage port --list | egrep '^ssh_port_t\s*tcp\s*${port}'",
       path    => ['/sbin', '/usr/sbin', '/bin'],
       require => Package['policycoreutils-python'],
     }
