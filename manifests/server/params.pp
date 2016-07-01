@@ -29,9 +29,11 @@ class ssh::server::params {
 
 
       if versioncmp($::operatingsystemmajrelease, '8') >=0 {
+        $ssh_host_ecdsa_key     = true
         $ssh_host_ed25519_key   = true
         $usePrivilegeSeparation = 'sandbox'
       } else {
+        $ssh_host_ecdsa_key     = true
         $ssh_host_ed25519_key   = false
         $usePrivilegeSeparation = 'yes'
       }
@@ -44,9 +46,11 @@ class ssh::server::params {
       $syslogFacility = 'AUTHPRIV'
 
       if versioncmp($::operatingsystemmajrelease, '7') >=0 {
+        $ssh_host_ecdsa_key     = true
         $ssh_host_ed25519_key   = true
         $usePrivilegeSeparation = 'sandbox'
       } else {
+        $ssh_host_ecdsa_key     = false
         $ssh_host_ed25519_key   = false
         $usePrivilegeSeparation = 'yes'
       }
