@@ -54,6 +54,10 @@
 #   List of aliases names for ssh_known_hosts.
 #   default: []
 #
+# [*sftp_server*]
+#   Which sftp server to user.
+#   default: external 'sftp-server', path depending on Operatingsystem
+#
 # === Examples
 #
 # class { 'ssh::server':
@@ -84,6 +88,7 @@ class ssh::server (
   $secure_moduli          = $ssh::server::params::secure_moduli,
   $export_host_keys       = $ssh::server::params::export_host_keys,
   $host_aliases           = $ssh::server::params::host_aliases,
+  $sftp_server            = $ssh::server::params::sftp_server,
 ) inherits ssh::server::params {
 
   if ! is_integer($port) { fail('Port must be an integer') }
@@ -98,6 +103,7 @@ class ssh::server (
   validate_bool($secure_moduli)
   validate_bool($export_host_keys)
   validate_array($host_aliases)
+  validate_re(sftp_server,"^(internal-sftp|${ssh::server::params::sftp_server})")
 
   class { 'ssh::server::install': } ->
   class { 'ssh::server::config': } ~>

@@ -12,6 +12,7 @@ class ssh::server::config {
   $kexAlgorithms          = $ssh::server::kexAlgorithms
   $ciphers                = $ssh::server::ciphers
   $macs                   = $ssh::server::macs
+  $sftp_server            = $ssh::server::sftp_server
 
   file { '/etc/ssh/sshd_config':
     ensure  => present,
