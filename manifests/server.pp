@@ -103,7 +103,7 @@ class ssh::server (
   validate_bool($secure_moduli)
   validate_bool($export_host_keys)
   validate_array($host_aliases)
-  validate_re(sftp_server,"^(internal-sftp|${ssh::server::params::sftp_server})")
+  validate_re($sftp_server,"^(internal-sftp|${ssh::server::params::sftp_server})$")
 
   class { 'ssh::server::install': } ->
   class { 'ssh::server::config': } ~>

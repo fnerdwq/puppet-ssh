@@ -153,7 +153,7 @@ AcceptEnv LC_IDENTIFICATION LC_ALL LANGUAGE
 AcceptEnv XMODIFIERS
 
 # override default of no subsystems
-Subsystem	sftp	<%= scope.lookupvar('ssh::server::params::sftp_server') %>
+Subsystem	sftp	<%= @sftp_server %>
 
 # Example of overriding settings on a per-user basis
 #Match User anoncvs
